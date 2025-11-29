@@ -7,7 +7,6 @@ with open("model.pkl", "rb") as f:
     model = pickle.load(f)
 
 def predict(data: PredictionInput) -> int:
-    # Convert Pydantic model (with computed fields) to dict
     data_dict = {
         "RevolvingUtilizationOfUnsecuredLines" : data.RevolvingUtilizationOfUnsecuredLines,
          "age" : data.age,
