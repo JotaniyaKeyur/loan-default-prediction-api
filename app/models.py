@@ -16,4 +16,3 @@ class Prediction(Base):
     user_id = Column(Integer, nullable=True)  
     predicted_category = Column(Integer, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-
