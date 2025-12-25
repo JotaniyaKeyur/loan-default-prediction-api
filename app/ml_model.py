@@ -1,12 +1,17 @@
-import pickle
 import pandas as pd
+from xgboost import XGBClassifier
+import os
 from .schemas import PredictionInput
 
-# Load model
-with open("model.pkl", "rb") as f:
-    model = pickle.load(f)
+# Absolute path to model.json
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(BASE_DIR, "model.json")
+
+model = XGBClassifier()
+model.load_model(MODEL_PATH)
 
 def predict(data: PredictionInput) -> int:
+    # Convert Pydantic model (with computed fields) to dict
     data_dict = {
         "RevolvingUtilizationOfUnsecuredLines" : data.RevolvingUtilizationOfUnsecuredLines,
          "age" : data.age,
