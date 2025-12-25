@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app import models, schemas, crud, auth, database, ml_model
 
 # DB
-#database.Base.metadata.create_all(bind=database.engine)
+database.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
 
@@ -37,4 +37,3 @@ def predict(input_data: schemas.PredictionInput, db: Session = Depends(get_db_se
     predicted_category = ml_model.predict(input_data)
     crud.create_prediction(db, predicted_category)
     return {"predicted_category": predicted_category}
-
